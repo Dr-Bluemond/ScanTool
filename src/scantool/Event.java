@@ -36,11 +36,11 @@ public class Event implements ActionListener,KeyListener,
     @Override
     public void keyPressed(KeyEvent event){
         if(event.getKeyChar() == KeyEvent.VK_ENTER){
-            String a = gui.jTextField1.getText();
+            String a = gui.codeInput.getText();
             if(!a.equals("")){
                // x.code.add(a);
                // x.writeExcel(a);
-                gui.jTextField1.setText("");
+                gui.codeInput.setText("");
 
                 
             }

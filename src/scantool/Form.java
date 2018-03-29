@@ -26,8 +26,7 @@ public class Form extends JFrame {
     JTextArea addressTextArea = new JTextArea("储存条码文件地址，名称自动生成，如没有则创建一个新的");
     JTextField address = new JTextField();
 
-    JTextField jTextField1;
-
+    JTextField codeInput = new JTextField("");
     JButton get = new JButton("打开");
     JTextArea getTextArea = new JTextArea("输入xlsx文件地址后，请点击读取。");
     JTextField delay = new JTextField();
@@ -47,7 +46,7 @@ public class Form extends JFrame {
         setLookAndFeel();
         setSize(510, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridLayout layout = new GridLayout(6, 2, 10, 10);
+        GridLayout layout = new GridLayout(7, 2, 10, 10);
         setLayout(layout);
 
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
@@ -70,11 +69,13 @@ public class Form extends JFrame {
 
         //add listeners
         System.out.print("I'm here");
-        jTextField1.addKeyListener(listener);
+      //  jTextField1.addKeyListener(listener);
         get.addActionListener(listener);
         System.out.print("i can't be here");
         paste.addActionListener(listener);
         stop.addActionListener(listener);
+        
+        
         addressTextArea.setLineWrap(true);
         getTextArea.setLineWrap(true);
         clearTextArea.setLineWrap(true);
@@ -89,6 +90,7 @@ public class Form extends JFrame {
         gotTextArea.setEditable(false);
         got.setEditable(false);
         stop.setEnabled(false);
+        add(codeInput);
         add(addressTextArea);
         add(address);
         add(getTextArea);
