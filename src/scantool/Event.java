@@ -9,6 +9,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JScrollBar;
 
 /**
  *
@@ -34,7 +35,8 @@ public class Event implements KeyListener{
             if (!a.equals("")) {
                 x.writeLine(a);
                 copyLine(a);
-                // x.writeExcel(a);
+                gui.output("已录入："+a);
+
                 gui.input.setText("");
 
             }
@@ -67,4 +69,5 @@ public class Event implements KeyListener{
     public void keyReleased(KeyEvent e) {
     }
 
+    
 }
