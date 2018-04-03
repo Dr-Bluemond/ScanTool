@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.poi.POIXMLProperties;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
@@ -50,6 +51,9 @@ public class Excel {
             XSSFRow row = sheet.createRow(0);
             row.createCell(0).setCellValue("条码信息:");
 
+            POIXMLProperties xmlProps = wb.getProperties();
+POIXMLProperties.CoreProperties coreProps = xmlProps.getCoreProperties();
+coreProps.setCreator("Bluemond From BHSF");
             //第三步将生成excel文件保存到指定路径下  
             try {
                 FileOutputStream fout = new FileOutputStream(addr);
@@ -66,6 +70,9 @@ public class Excel {
                 // 读取Excel  
                 InputStream is = new FileInputStream(addr);
                 wb = new XSSFWorkbook(is);
+                
+
+                
                 sheet = wb.getSheetAt(0);
                 quantity = sheet.getLastRowNum();
                 
