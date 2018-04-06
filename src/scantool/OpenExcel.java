@@ -20,6 +20,7 @@ public class OpenExcel extends javax.swing.JFrame {
      */
     public OpenExcel() {
         super("快捷录入器--新建/打开文件");
+        setLocation(500,200);
         initComponents();
         initText();
     }
@@ -119,7 +120,6 @@ public class OpenExcel extends javax.swing.JFrame {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    System.out.print(info.getClassName());
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

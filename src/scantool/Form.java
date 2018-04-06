@@ -6,6 +6,7 @@
 package scantool;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -31,17 +32,17 @@ public class Form extends JFrame {
     JPanel panel12 = new JPanel();
     JLabel consoleLabel = new JLabel("信息面板：");
     JButton setting = new JButton("设置");
-    JButton help = new JButton("帮助");
     JTextArea console = new JTextArea();
     JScrollPane consolePane = new JScrollPane();
     JPanel panel2 = new JPanel();
     JLabel inputLabel = new JLabel("条码输入框：");
     JTextField input = new JTextField("");
-    javax.swing.Box.Filler filler1= new javax.swing.Box.Filler(new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 32767));;
+    javax.swing.Box.Filler filler1= new javax.swing.Box.Filler(new java.awt.Dimension(250, 0), new java.awt.Dimension(250, 0), new java.awt.Dimension(250, 32767));;
     
 
     public Form(Excel x) {
         super("快捷录入器 v1 By Bluemond/BHSF");
+        setLocation(500,200);
 
         Event listener = new Event(this, x);
         setLookAndFeel();
@@ -63,7 +64,8 @@ public class Form extends JFrame {
         panel12.setLayout(flow);
         panel12.add(consoleLabel);
         panel12.add(filler1);
-        panel12.add(help);
+        setting.addActionListener(listener);
+        
         panel12.add(setting);
         panel1.add(BorderLayout.NORTH,panel12);
 
