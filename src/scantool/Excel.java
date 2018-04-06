@@ -36,11 +36,10 @@ public class Excel {
     public XSSFSheet sheet = null;
     public int quantity;
     String addr = null;
-    
 
     public Excel(String addrin) {
         addr = addrin;
-        
+
         File file = new File(addrin);
         if (!file.exists()) {
             //第一步创建workbook  
@@ -52,8 +51,8 @@ public class Excel {
             row.createCell(0).setCellValue("条码信息:");
 
             POIXMLProperties xmlProps = wb.getProperties();
-POIXMLProperties.CoreProperties coreProps = xmlProps.getCoreProperties();
-coreProps.setCreator("Bluemond From BHSF");
+            POIXMLProperties.CoreProperties coreProps = xmlProps.getCoreProperties();
+            coreProps.setCreator("Bluemond From BHSF");
             //第三步将生成excel文件保存到指定路径下  
             try {
                 FileOutputStream fout = new FileOutputStream(addr);
@@ -64,36 +63,33 @@ coreProps.setCreator("Bluemond From BHSF");
             }
             System.out.println("Excel文件生成成功...");
 
-            
         }
         try {
-                // 读取Excel  
-                InputStream is = new FileInputStream(addr);
-                wb = new XSSFWorkbook(is);
-                
+            // 读取Excel  
+            InputStream is = new FileInputStream(addr);
+            wb = new XSSFWorkbook(is);
 
-                
-                sheet = wb.getSheetAt(0);
-                quantity = sheet.getLastRowNum();
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            sheet = wb.getSheetAt(0);
+            quantity = sheet.getLastRowNum();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void writeLine(String line) {
         //在原来的基础上新建一行并输入数据
-            XSSFRow row = sheet.createRow(quantity+1);
-            row.createCell(0).setCellValue(line);
-            quantity++;
-            //保存
-            try {
-                FileOutputStream fout = new FileOutputStream(addr);
-                wb.write(fout);
-                fout.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        XSSFRow row = sheet.createRow(quantity + 1);
+        row.createCell(0).setCellValue(line);
+        quantity++;
+        //保存
+        try {
+            FileOutputStream fout = new FileOutputStream(addr);
+            wb.write(fout);
+            fout.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
