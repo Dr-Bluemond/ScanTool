@@ -74,6 +74,8 @@ public class Event implements KeyListener, ActionListener {
                 gui.output("已录入：" + a);
 
                 gui.input.setText("");
+            } else if (a.equals("")) {
+                //Do nothing
             } else {
                 gui.output("错误的条码：" + a);
                 gui.input.setText("");

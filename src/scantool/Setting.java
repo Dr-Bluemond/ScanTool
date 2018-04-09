@@ -21,11 +21,12 @@ public class Setting extends javax.swing.JFrame {
      * Creates new form Setting
      */
     Event e;
+
     public Setting(Event evtin) {
         e = evtin;
         initComponents();
         this.setAlwaysOnTop(true);
-        setLocation(500,200);
+        setLocation(500, 200);
     }
 
     /**
@@ -89,41 +90,41 @@ public class Setting extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         finish();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             finish();
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
-    private void finish(){
+    private void finish() {
         // TODO add your handling code here:
         int length = Integer.parseInt(jTextField1.getText());
         e.setLength(length);
-        System.out.print(""+length);
+        System.out.print("" + length);
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
 
             /* 写入Txt文件 */
             File writename = new File(".\\config"); // 相对路径，如果没有则要建立一个新的output.txt文件  
             writename.createNewFile(); // 创建新文件  
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            out.write(""+length); // \r\n即为换行  
+            out.write("" + length); // \r\n即为换行  
             out.flush(); // 把缓存区内容压入文件  
             out.close(); // 最后记得关闭文件  
 
         } catch (IOException e) {
         }
-        
+
         dispose();
     }
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

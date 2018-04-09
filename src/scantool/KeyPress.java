@@ -88,7 +88,8 @@ public class KeyPress {
         return false;
 
     }
-     public static boolean confirm2(Robot r) {
+
+    public static boolean confirm2(Robot r) {
         Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();//获取剪切板
         Transferable tText = new StringSelection("");
         while (true) {
