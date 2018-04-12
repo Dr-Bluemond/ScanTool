@@ -7,6 +7,8 @@ package scantool;
 
 import java.io.File;
 import java.util.Calendar;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -18,9 +20,10 @@ public class OpenExcel extends javax.swing.JFrame {
     /**
      * Creates new form OpenExcel
      */
+    String desktopPath;
     public OpenExcel() {
         super("快捷录入器--新建/打开文件");
-        setLocation(500,200);
+        setLocation(500, 200);
         initComponents();
         initText();
     }
@@ -90,6 +93,19 @@ public class OpenExcel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        JFileChooser fcDlg = new JFileChooser(desktopPath);
+        fcDlg.setDialogTitle("请选择要打开的Excel...");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+          "Excel 2007(*.xlsx)", "xlsx");
+        fcDlg.setFileFilter(filter);
+        
+        int returnVal = fcDlg.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String filepath = fcDlg.getSelectedFile().getPath();
+            jTextField1.setText(filepath);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -101,9 +117,9 @@ public class OpenExcel extends javax.swing.JFrame {
         // TODO add your handling code here:
         String addr = jTextField1.getText();
         Excel x = new Excel(addr);
-        try{
-        new Form(x);
-        }catch(Exception e ){
+        try {
+            new Form(x);
+        } catch (Exception e) {
         }
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -151,25 +167,25 @@ public class OpenExcel extends javax.swing.JFrame {
 
     private void initText() {
         //获取桌面路径
-        File desktopDir = FileSystemView.getFileSystemView() .getHomeDirectory();
-        String desktopPath = desktopDir.getAbsolutePath();
-        
+        File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
+        desktopPath = desktopDir.getAbsolutePath();
+
         //获取时间
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
-        int month = now.get(Calendar.MONTH)+1;
+        int month = now.get(Calendar.MONTH) + 1;
         int day = now.get(Calendar.DAY_OF_MONTH);
         int hour = now.get(Calendar.HOUR_OF_DAY);
         String ap;
-        if(hour<13){
+        if (hour < 13) {
             ap = "am";
-        }else{
+        } else {
             ap = "pm";
-        }    
-        
-        String filename = year+"-"+month+"-"+day+ap;
-        
-        jTextField1.setText(desktopPath+"\\"+filename+".xlsx");
+        }
+
+        String filename = year + "-" + month + "-" + day + ap;
+
+        jTextField1.setText(desktopPath + "\\" + filename + ".xlsx");
 
     }
 }

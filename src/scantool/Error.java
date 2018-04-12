@@ -13,19 +13,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Error extends JFrame {
-
+    
     JTextArea text = new JTextArea();
     JButton ok = new JButton("确定（空格）");
-    Dimension d;
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Dimension screen = toolkit.getScreenSize();
+    Dimension d = new Dimension(screen.width/2,screen.height/2);
+    Color ssr = new Color(227,130,163);
+    Color bilibili = new Color(250,114,154);
 
 
     public Error() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension d = toolkit.getScreenSize();
+        super("ERROR");
+        
         setSize(d.width, d.height);
-        setLocation(0, 0);
+        setLocation(screen.width/4, screen.height/4);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        getContentPane().setBackground(Color.red);//设置背景为红色
+        
+//        getContentPane().setBackground(pink);//设置背景为红色
         getContentPane().setVisible(true);
         setVisible(true);
         setAlwaysOnTop(true);
@@ -42,8 +47,8 @@ public class Error extends JFrame {
 
         text.setLineWrap(true);
         text.setEditable(false);
-        text.setBackground(Color.red);
-        text.setFont(new Font(null, 1, 100));
+        text.setBackground(bilibili);
+        text.setFont(new Font(null, 1, 70));
         text.setText("条码长度错误,请重新录入这一本书。");
 
         text.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -62,8 +67,8 @@ public class Error extends JFrame {
                 dispose();
             }
         });
-        ok.setPreferredSize(new Dimension(d.width, d.height / 8));
-        ok.setFont(new Font(null, 1, 100));
+        ok.setPreferredSize(new Dimension(d.width, d.height / 6));
+        ok.setFont(new Font(null, 1, 70));
         add(BorderLayout.SOUTH, ok);
     }
 }

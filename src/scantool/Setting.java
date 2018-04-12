@@ -113,7 +113,7 @@ public class Setting extends javax.swing.JFrame {
             File writename = new File(".\\config"); // 相对路径，如果没有则要建立一个新的output.txt文件  
             writename.createNewFile(); // 创建新文件  
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            out.write("" + length); // \r\n即为换行  
+            out.write(String.valueOf(length)); // \r\n即为换行  
             out.flush(); // 把缓存区内容压入文件  
             out.close(); // 最后记得关闭文件  
 
