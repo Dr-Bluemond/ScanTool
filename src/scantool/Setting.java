@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Setting extends javax.swing.JFrame {
         initComponents();
         this.setAlwaysOnTop(true);
         setLocation(500, 200);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -105,7 +107,6 @@ public class Setting extends javax.swing.JFrame {
         // TODO add your handling code here:
         int length = Integer.parseInt(jTextField1.getText());
         e.setLength(length);
-        System.out.print("" + length);
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
 
             /* 写入Txt文件 */

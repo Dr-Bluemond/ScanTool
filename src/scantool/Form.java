@@ -40,7 +40,7 @@ public class Form extends JFrame {
     
 
     public Form(Excel x) {
-        super("快捷录入器 v1 By Bluemond/BHSF");
+        super("快捷录入器 v1.1 By Bluemond/BHSF");
         setLocation(500, 200);
 
         Event listener = new Event(this, x);
