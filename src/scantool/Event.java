@@ -24,12 +24,13 @@ import java.io.InputStreamReader;
 public class Event implements KeyListener, ActionListener {
 
     Form gui;
-    Thread playing;
     int i;
     Excel x;
-    public int length = 0;
+    int length = 0;
+    int delay = 0;
+    
 
-    public Event(Form in, Excel xin) {
+    public Event(Form gin, Excel xin) {
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
 
             /* 读入TXT文件 */
@@ -41,23 +42,34 @@ public class Event implements KeyListener, ActionListener {
             String line;
             line = br.readLine();
             length = Integer.parseInt(line);
+            line = br.readLine();
+            delay = Integer.parseInt(line);
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-        gui = in;
+        gui = gin;
         x = xin;
     }
 
     public void setLength(int lengthin) {
+        if(length != lengthin){
+           gui.print("条码标准长度已设置为" + lengthin + "并已保存以供以后使用");
+        }
         length = lengthin;
-        gui.output("条码标准长度已设置为" + length + "并已保存以供以后使用");
+        
+    }
+    public void setDelay(int delayin){
+        if(delay != delayin){
+            gui.print("延迟已更改，延迟过低会出错");
+        }
+        delay = delayin;
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Setting set = new Setting(this);
-        set.setVisible(true);
+        new Setting(this).setVisible(true);
 
     }
 
@@ -71,15 +83,15 @@ public class Event implements KeyListener, ActionListener {
             } else if (a.length() == length) {
                 x.writeLine(a);
                 copyLine(a);
-                gui.output("已录入：" + a);
+                gui.print("已录入：" + a);
 
                 gui.input.setText("");
             } else if (a.equals("")) {
                 //Do nothing
             } else {
-                gui.output("错误的条码：" + a);
+                gui.print("错误的条码：" + a);
                 gui.input.setText("");
-                new Error();
+                new Error().setVisible(true);
             }
 
         }
@@ -88,17 +100,16 @@ public class Event implements KeyListener, ActionListener {
     public void copyLine(String line) {
         try {
             Robot robot = new Robot();
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB);
-            Thread.sleep(100);
+            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB,delay);
+            robot.delay(100);
             KeyPress.keyPressString(robot, line);
-            Thread.sleep(10);
+            robot.delay(10);
             KeyPress.keyPress(robot, KeyEvent.VK_ENTER); // 按下 enter 换行
-            Thread.sleep(10);
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB);
-
-            KeyPress.keyPress(robot, KeyEvent.VK_ENTER); // 按下 enter 换行
-
-        } catch (AWTException | InterruptedException e) {
+            robot.delay(10);
+            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB,delay);
+            
+        } catch (AWTException e) {
+            e.printStackTrace();
         }
 
     }

@@ -78,15 +78,15 @@ public class Form extends JFrame {
         add(BorderLayout.SOUTH, panel2);
 
         if (x.quantity != 0) {
-            output("当前Excel文件中有" + x.quantity + "个条码，将会继续录入");
+            print("当前Excel文件中有" + x.quantity + "个条码，将会继续录入");
         } else {
-            output("已新建Excel，可以开始录入。");
+            print("已新建Excel，可以开始录入。");
         }
         setVisible(true);
 
     }
 
-    public void output(String in) {
+    public void print(String in) {
         console.append(in + "\r\n");
         JScrollBar sBar = consolePane.getVerticalScrollBar();
         sBar.setValue(sBar.getMaximum());

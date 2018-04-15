@@ -1,6 +1,5 @@
 package scantool;
 
-import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -13,12 +12,11 @@ public class KeyPress {
     /**
      *
      * @param r
-     *
-     * @throws AWTException
+     * @param key
      *
      */
     // shift+ 按键
-    public static void keyPressWithShift(Robot r, int key) {
+    public static void keyPressWithShift(Robot r, int key,int delay) {
         r.keyPress(KeyEvent.VK_SHIFT);
         r.keyPress(key);
         r.keyRelease(key);
@@ -27,20 +25,23 @@ public class KeyPress {
     }
 
     // ctrl+ 按键
-    public static void keyPressWithCtrl(Robot r, int key) {
+    public static void keyPressWithCtrl(Robot r, int key,int delay) {
         r.keyPress(KeyEvent.VK_CONTROL);
         r.keyPress(key);
+        r.delay(20+delay/10);
         r.keyRelease(key);
         r.keyRelease(KeyEvent.VK_CONTROL);
+        r.delay(20+delay);
     }
 
     // alt+ 按键
-    public static void keyPressWithAlt(Robot r, int key) {
+    public static void keyPressWithAlt(Robot r, int key,int delay) {
         r.keyPress(KeyEvent.VK_ALT);
         r.keyPress(key);
+        r.delay(20+delay/10);
         r.keyRelease(key);
         r.keyRelease(KeyEvent.VK_ALT);
-        r.delay(30);
+        r.delay(20+delay);
     }
 
     //打印出字符串
@@ -56,7 +57,7 @@ public class KeyPress {
                 System.out.print("出错已重做");
             }
         }
-        keyPressWithCtrl(r, KeyEvent.VK_V);//粘贴
+        keyPressWithCtrl(r, KeyEvent.VK_V,10);//粘贴
         r.delay(20);
     }
 
@@ -65,49 +66,5 @@ public class KeyPress {
         r.keyPress(key);
         r.keyRelease(key);
         r.delay(30);
-    }
-
-    public static boolean confirm1(Robot r) {
-        Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();//获取剪切板
-        Transferable tText = new StringSelection("");
-        while (true) {
-            try {
-                clip.setContents(tText, null); //设置剪切板内容
-                break;
-            } catch (Exception e) {
-            }
-        }
-
-        keyPressWithCtrl(r, KeyEvent.VK_A);
-        r.delay(5);
-        keyPressWithCtrl(r, KeyEvent.VK_C);
-        if (clip.getContents(null) == null) {
-            return true;
-
-        }
-        return false;
-
-    }
-
-    public static boolean confirm2(Robot r) {
-        Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();//获取剪切板
-        Transferable tText = new StringSelection("");
-        while (true) {
-            try {
-                clip.setContents(tText, null); //设置剪切板内容
-                break;
-            } catch (Exception e) {
-            }
-        }
-
-        keyPressWithCtrl(r, KeyEvent.VK_A);
-        r.delay(5);
-        keyPressWithCtrl(r, KeyEvent.VK_C);
-        if (clip.getContents(null) != null) {
-            return true;
-
-        }
-        return false;
-
     }
 }

@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Error extends JFrame {
@@ -32,7 +31,6 @@ public class Error extends JFrame {
         
 //        getContentPane().setBackground(pink);//设置背景为红色
         getContentPane().setVisible(true);
-        setVisible(true);
         setAlwaysOnTop(true);
 
         BorderLayout layout = new BorderLayout();
