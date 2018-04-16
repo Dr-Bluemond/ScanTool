@@ -22,9 +22,10 @@ public class OpenExcel extends javax.swing.JFrame {
      * Creates new form OpenExcel
      */
     String desktopPath;
+
     public OpenExcel() {
         super("快捷录入器--新建/打开文件");
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 200);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 200);
         initComponents();
         initText();
     }
@@ -98,9 +99,9 @@ public class OpenExcel extends javax.swing.JFrame {
         JFileChooser fcDlg = new JFileChooser(desktopPath);
         fcDlg.setDialogTitle("请选择要打开的Excel...");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-          "Excel 2007(*.xlsx)", "xlsx");
+                "Excel 2007(*.xlsx)", "xlsx");
         fcDlg.setFileFilter(filter);
-        
+
         int returnVal = fcDlg.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             String filepath = fcDlg.getSelectedFile().getPath();

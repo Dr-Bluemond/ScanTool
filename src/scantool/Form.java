@@ -44,7 +44,7 @@ public class Form extends JFrame {
 
     public Form(Excel x) {
         super("快捷录入器 v1.1 By Bluemond/BHSF");
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 200);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 200);
 
         Event listener = new Event(this, x);
         setLookAndFeel();

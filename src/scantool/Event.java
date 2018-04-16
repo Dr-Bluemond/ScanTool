@@ -108,7 +108,7 @@ public class Event implements KeyListener, ActionListener {
                 new Error("请设置流通系统条码框坐标！").setVisible(true);
             } else if (a.length() == length) {
                 x.writeLine(a);
-                newCopyLine(a,delay);
+                newCopyLine(a, delay);
                 gui.print("已录入：" + a);
 
                 gui.input.setText("");
@@ -140,20 +140,20 @@ public class Event implements KeyListener, ActionListener {
 
     }
 
-    public void newCopyLine(String line,int dly) {
+    public void newCopyLine(String line, int dly) {
         try {
             Robot r = new Robot();
             r.mouseMove(target.x, target.y);
             r.mousePress(InputEvent.BUTTON1_MASK);
-            r.delay(20+dly);
+            r.delay(20 + dly);
             r.mouseRelease(InputEvent.BUTTON1_MASK);
-            r.delay(20+dly);
+            r.delay(20 + dly);
             KeyPress.keyPressString(r, line);
-            r.delay(20+dly);
+            r.delay(20 + dly);
             KeyPress.keyPress(r, KeyEvent.VK_ENTER); // 按下 enter 换行
-            r.delay(20+dly);
+            r.delay(20 + dly);
             gui.input.requestFocus();
-            
+
         } catch (AWTException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }

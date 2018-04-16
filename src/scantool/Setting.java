@@ -27,11 +27,11 @@ public class Setting extends javax.swing.JFrame {
         e = evtin;
         initComponents();
         this.setAlwaysOnTop(true);
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 200);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jTextField1.setText(String.valueOf(e.length));
         jTextField2.setText(String.valueOf(e.delay));
-        
+
     }
 
     /**
@@ -125,7 +125,7 @@ public class Setting extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
             finish();
         }
     }//GEN-LAST:event_jTextField1KeyPressed
@@ -136,7 +136,7 @@ public class Setting extends javax.swing.JFrame {
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
             finish();
         }
     }//GEN-LAST:event_jTextField2KeyPressed
@@ -153,7 +153,7 @@ public class Setting extends javax.swing.JFrame {
             File writename = new File(".\\config"); // 相对路径，如果没有则要建立一个新的output.txt文件  
             writename.createNewFile(); // 创建新文件  
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            out.write(String.valueOf(length)+"\r\n"+String.valueOf(delay)); // \r\n即为换行  
+            out.write(String.valueOf(length) + "\r\n" + String.valueOf(delay)); // \r\n即为换行  
             out.flush(); // 把缓存区内容压入文件  
             out.close(); // 最后记得关闭文件  
 

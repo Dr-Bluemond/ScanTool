@@ -16,7 +16,7 @@ public class KeyPress {
      *
      */
     // shift+ 按键
-    public static void keyPressWithShift(Robot r, int key,int delay) {
+    public static void keyPressWithShift(Robot r, int key, int delay) {
         r.keyPress(KeyEvent.VK_SHIFT);
         r.keyPress(key);
         r.keyRelease(key);
@@ -25,23 +25,23 @@ public class KeyPress {
     }
 
     // ctrl+ 按键
-    public static void keyPressWithCtrl(Robot r, int key,int delay) {
+    public static void keyPressWithCtrl(Robot r, int key, int delay) {
         r.keyPress(KeyEvent.VK_CONTROL);
         r.keyPress(key);
-        r.delay(20+delay/10);
+        r.delay(20 + delay / 10);
         r.keyRelease(key);
         r.keyRelease(KeyEvent.VK_CONTROL);
-        r.delay(20+delay);
+        r.delay(20 + delay);
     }
 
     // alt+ 按键
-    public static void keyPressWithAlt(Robot r, int key,int delay) {
+    public static void keyPressWithAlt(Robot r, int key, int delay) {
         r.keyPress(KeyEvent.VK_ALT);
         r.keyPress(key);
-        r.delay(20+delay/10);
+        r.delay(20 + delay / 10);
         r.keyRelease(key);
         r.keyRelease(KeyEvent.VK_ALT);
-        r.delay(20+delay);
+        r.delay(20 + delay);
     }
 
     //打印出字符串
@@ -57,7 +57,7 @@ public class KeyPress {
                 System.out.print("出错已重做");
             }
         }
-        keyPressWithCtrl(r, KeyEvent.VK_V,10);//粘贴
+        keyPressWithCtrl(r, KeyEvent.VK_V, 10);//粘贴
         r.delay(20);
     }
 
