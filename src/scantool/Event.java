@@ -6,15 +6,21 @@
 package scantool;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +34,7 @@ public class Event implements KeyListener, ActionListener {
     Excel x;
     int length = 0;
     int delay = 0;
-    
+    Point target = null;
 
     public Event(Form gin, Excel xin) {
         try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
@@ -53,24 +59,42 @@ public class Event implements KeyListener, ActionListener {
     }
 
     public void setLength(int lengthin) {
-        if(length != lengthin){
-           gui.print("条码标准长度已设置为" + lengthin + "并已保存以供以后使用");
+        if (length != lengthin) {
+            gui.print("条码标准长度已设置为" + lengthin + "并已保存以供以后使用");
         }
         length = lengthin;
-        
+
     }
-    public void setDelay(int delayin){
-        if(delay != delayin){
-            gui.print("延迟已更改，延迟过低会出错");
+
+    public void setDelay(int delayin) {
+        if (delay != delayin) {
+            gui.print("延迟已更改，不出错的前提下推荐延迟设置为0。");
         }
         delay = delayin;
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new Setting(this).setVisible(true);
+        if (e.getActionCommand().equals("设置")) {
+            new Setting(this).setVisible(true);
+        } else {
+            gui.print("请将鼠标放在流通系统窗口中，程序将在3秒钟后读取鼠标位置");
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                        Point point = MouseInfo.getPointerInfo().getLocation();
+                        target = point;
+                        gui.print("坐标设置成功（" + target.x + "," + target.y + ")");
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }.start();
 
+        }
     }
 
     @Override
@@ -80,9 +104,11 @@ public class Event implements KeyListener, ActionListener {
             if (a.equals("clear")) {
                 gui.console.setText(null);
                 gui.input.setText("");
+            } else if (target == null) {
+                new Error("请设置流通系统条码框坐标！").setVisible(true);
             } else if (a.length() == length) {
                 x.writeLine(a);
-                copyLine(a);
+                newCopyLine(a,delay);
                 gui.print("已录入：" + a);
 
                 gui.input.setText("");
@@ -91,7 +117,7 @@ public class Event implements KeyListener, ActionListener {
             } else {
                 gui.print("错误的条码：" + a);
                 gui.input.setText("");
-                new Error().setVisible(true);
+                new Error("条码长度错误,请重新录入这一本书。").setVisible(true);
             }
 
         }
@@ -100,16 +126,36 @@ public class Event implements KeyListener, ActionListener {
     public void copyLine(String line) {
         try {
             Robot robot = new Robot();
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB,delay);
+            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB, delay);
             robot.delay(100);
             KeyPress.keyPressString(robot, line);
             robot.delay(10);
             KeyPress.keyPress(robot, KeyEvent.VK_ENTER); // 按下 enter 换行
             robot.delay(10);
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB,delay);
-            
+            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB, delay);
+
         } catch (AWTException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public void newCopyLine(String line,int dly) {
+        try {
+            Robot r = new Robot();
+            r.mouseMove(target.x, target.y);
+            r.mousePress(InputEvent.BUTTON1_MASK);
+            r.delay(20+dly);
+            r.mouseRelease(InputEvent.BUTTON1_MASK);
+            r.delay(20+dly);
+            KeyPress.keyPressString(r, line);
+            r.delay(20+dly);
+            KeyPress.keyPress(r, KeyEvent.VK_ENTER); // 按下 enter 换行
+            r.delay(20+dly);
+            gui.input.requestFocus();
+            
+        } catch (AWTException ex) {
+            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

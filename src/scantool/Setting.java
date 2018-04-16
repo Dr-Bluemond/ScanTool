@@ -5,7 +5,7 @@
  */
 package scantool;
 
-import com.sun.glass.events.KeyEvent;
+import java.awt.Toolkit;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -27,7 +27,7 @@ public class Setting extends javax.swing.JFrame {
         e = evtin;
         initComponents();
         this.setAlwaysOnTop(true);
-        setLocation(500, 200);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jTextField1.setText(String.valueOf(e.length));
         jTextField2.setText(String.valueOf(e.delay));

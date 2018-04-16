@@ -22,7 +22,7 @@ public class Error extends JFrame {
     Color bilibili = new Color(250,114,154);
 
 
-    public Error() {
+    public Error(String errorInfo) {
         super("ERROR");
         
         setSize(d.width, d.height);
@@ -46,8 +46,8 @@ public class Error extends JFrame {
         text.setLineWrap(true);
         text.setEditable(false);
         text.setBackground(bilibili);
-        text.setFont(new Font(null, 1, 70));
-        text.setText("条码长度错误,请重新录入这一本书。");
+        text.setFont(new Font(null, 1, 50));
+        text.setText(errorInfo);
 
         text.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -66,7 +66,7 @@ public class Error extends JFrame {
             }
         });
         ok.setPreferredSize(new Dimension(d.width, d.height / 6));
-        ok.setFont(new Font(null, 1, 70));
+        ok.setFont(new Font(null, 1, 50));
         add(BorderLayout.SOUTH, ok);
     }
 }

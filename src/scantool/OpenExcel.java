@@ -5,6 +5,7 @@
  */
 package scantool;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.Calendar;
 import javax.swing.JFileChooser;
@@ -23,7 +24,7 @@ public class OpenExcel extends javax.swing.JFrame {
     String desktopPath;
     public OpenExcel() {
         super("快捷录入器--新建/打开文件");
-        setLocation(500, 200);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 200);
         initComponents();
         initText();
     }
