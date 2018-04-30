@@ -57,7 +57,7 @@ public class KeyPress {
                 System.out.print("出错已重做");
             }
         }
-        keyPressWithCtrl(r, KeyEvent.VK_V, 10);//粘贴
+        keyPressWithCtrl(r, KeyEvent.VK_V, 20);//粘贴
         r.delay(20);
     }
 

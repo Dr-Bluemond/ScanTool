@@ -6,7 +6,6 @@
 package scantool;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -43,7 +42,7 @@ public class Form extends JFrame {
     
 
     public Form(Excel x) {
-        super("快捷录入器 v1.1 By Bluemond/BHSF");
+        super("快捷录入器 v1.2 By Bluemond/BHSF");
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 200);
 
         Event listener = new Event(this, x);
@@ -81,10 +80,13 @@ public class Form extends JFrame {
         panel2.add(input);
         add(BorderLayout.SOUTH, panel2);
 
-        if (x.quantity != 0) {
-            print("当前Excel文件中有" + x.quantity + "个条码，将会继续录入");
-        } else {
+        if (x.isNew) {
             print("已新建Excel，可以开始录入。");
+            print("请“确认目标条码框”");
+        } else {
+            print("已打开Excel，当前有" + x.quantity + "个条码，继续录入");
+            print("请“确认目标条码框”");
+
         }
         setVisible(true);
 

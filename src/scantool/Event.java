@@ -6,7 +6,6 @@
 package scantool;
 
 import java.awt.AWTException;
-import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
@@ -126,13 +125,14 @@ public class Event implements KeyListener, ActionListener {
     public void copyLine(String line) {
         try {
             Robot robot = new Robot();
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB, delay);
+
+//            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB, delay);
             robot.delay(100);
             KeyPress.keyPressString(robot, line);
             robot.delay(10);
             KeyPress.keyPress(robot, KeyEvent.VK_ENTER); // 按下 enter 换行
             robot.delay(10);
-            KeyPress.keyPressWithAlt(robot, KeyEvent.VK_TAB, delay);
+            gui.input.requestFocusInWindow();
 
         } catch (AWTException e) {
             e.printStackTrace();
@@ -145,14 +145,16 @@ public class Event implements KeyListener, ActionListener {
             Robot r = new Robot();
             r.mouseMove(target.x, target.y);
             r.mousePress(InputEvent.BUTTON1_MASK);
-            r.delay(20 + dly);
+            r.delay(4 + dly / 5);
             r.mouseRelease(InputEvent.BUTTON1_MASK);
             r.delay(20 + dly);
             KeyPress.keyPressString(r, line);
             r.delay(20 + dly);
             KeyPress.keyPress(r, KeyEvent.VK_ENTER); // 按下 enter 换行
             r.delay(20 + dly);
+//            while(!gui.input.isFocusOwner()){
             gui.input.requestFocus();
+//            }
 
         } catch (AWTException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);

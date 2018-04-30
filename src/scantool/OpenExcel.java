@@ -24,10 +24,11 @@ public class OpenExcel extends javax.swing.JFrame {
     String desktopPath;
 
     public OpenExcel() {
-        super("快捷录入器--新建/打开文件");
+        super("快捷录入器--打开/新建文件");
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2, 200);
         initComponents();
         initText();
+        this.requestFocus();
     }
 
     /**
@@ -51,7 +52,7 @@ public class OpenExcel extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("打开（没有则创建）");
+        jButton1.setText("打开/新建");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -97,7 +98,7 @@ public class OpenExcel extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         JFileChooser fcDlg = new JFileChooser(desktopPath);
-        fcDlg.setDialogTitle("请选择要打开的Excel...");
+        fcDlg.setDialogTitle("继续录入进这个Excel...");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Excel 2007(*.xlsx)", "xlsx");
         fcDlg.setFileFilter(filter);
@@ -180,9 +181,9 @@ public class OpenExcel extends javax.swing.JFrame {
         int hour = now.get(Calendar.HOUR_OF_DAY);
         String ap;
         if (hour < 13) {
-            ap = "am";
+            ap = "-AM";
         } else {
-            ap = "pm";
+            ap = "-PM";
         }
 
         String filename = year + "-" + month + "-" + day + ap;

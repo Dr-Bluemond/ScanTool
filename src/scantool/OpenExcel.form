@@ -60,7 +60,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x6253;&#x5f00;&#xff08;&#x6ca1;&#x6709;&#x5219;&#x521b;&#x5efa;&#xff09;"/>
+        <Property name="text" type="java.lang.String" value="&#x6253;&#x5f00;/&#x65b0;&#x5efa;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
